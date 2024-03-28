@@ -3,7 +3,6 @@ CALCULATE(DIVIDE(CALCULATE(SUM(Opportunities[Count_of_Opportunity]), FILTER(Oppo
 
 
 
-
 Average Opportunities per month (Before) =
 IF(
     [Total Opportunities (After)] > 0,
@@ -12,8 +11,16 @@ IF(
             SUM(Opportunities[Count_of_Opportunity]),
             DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
         ),
+        REMOVEFILTERS(Opportunities[Participation_Time]) // Removes filters from 'After' column
+    ),
+    CALCULATE(
+        DIVIDE(
+            SUM(Opportunities[Count_of_Opportunity]),
+            DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
+        ),
         Opportunities[Participation_Time] = "Before"
     )
 )
+
 
 
