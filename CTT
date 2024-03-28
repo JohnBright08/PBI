@@ -13,15 +13,18 @@ IF(
         ),
         REMOVEFILTERS(Opportunities[Participation_Time]) // Removes filters from 'After' column
     ),
-    CALCULATE(
-        DIVIDE(
-            SUM(Opportunities[Count_of_Opportunity]),
-            DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
-        ),
-        Opportunities[Participation_Time] = "Before",
-        [Total Opportunities (Before)] > 0 // Ensures there are opportunities in the 'Before' column
+    IF(
+        HASONEVALUE(Opportunities[Participation_Time]) && VALUES(Opportunities[Participation_Time]) = "Before",
+        CALCULATE(
+            DIVIDE(
+                SUM(Opportunities[Count_of_Opportunity]),
+                DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
+            ),
+            Opportunities[Participation_Time] = "Before"
+        )
     )
 )
+
 
 
 
