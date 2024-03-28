@@ -5,21 +5,15 @@ CALCULATE(DIVIDE(CALCULATE(SUM(Opportunities[Count_of_Opportunity]), FILTER(Oppo
 
 
 Average Opportunities per month (Before) =
-VAR AfterTotal =
-    CALCULATE(
-        [Total Opportunities (After)],
-        ALLEXCEPT('static fiscal_calendar', 'static fiscal_calendar'[fiscal_month])
-    )
-RETURN
+IF(
+    [Total Opportunities (After)] > 0,
     CALCULATE(
         DIVIDE(
             SUM(Opportunities[Count_of_Opportunity]),
             DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
         ),
-        FILTER(
-            ALL('static fiscal_calendar'[fiscal_month]),
-            AfterTotal > 0 || ISBLANK(AfterTotal)
-        ),
         Opportunities[Participation_Time] = "Before"
     )
+)
+
 
