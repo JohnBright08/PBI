@@ -1,0 +1,2 @@
+Average Opportunities per month (Before) = 
+CALCULATE(DIVIDE(CALCULATE(SUM(Opportunities[Count_of_Opportunity]), FILTER(Opportunities, Opportunities[Participation_Time] = "Before")), CALCULATE(DISTINCTCOUNT(Opportunities[Opp_Timeid_District]), FILTER(Opportunities, Opportunities[Participation_Time] = "Before"))), FILTER(ALL('static fiscal_calendar'[fiscal_month]), [Total Opportunities (After)] > 0)) 
