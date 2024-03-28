@@ -18,7 +18,8 @@ IF(
             SUM(Opportunities[Count_of_Opportunity]),
             DISTINCTCOUNT(Opportunities[Opp_Timeid_District])
         ),
-        Opportunities[Participation_Time] = "Before"
+        Opportunities[Participation_Time] = "Before",
+        [Total Opportunities (Before)] > 0 // Ensures there are opportunities in the 'Before' column
     )
 )
 
